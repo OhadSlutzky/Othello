@@ -1,11 +1,13 @@
 ﻿using System;
 
-namespace Players_Data
+namespace Player_Data
 {
-    class PlayersData
+    public class PlayersData
     {
         private string m_Player1Name;
         private string m_Player2Name;
+
+        public PlayersData() { m_Player1Name = null;  m_Player2Name = null; }
 
         public void SetPlayer1Name(string i_Player1Name)
         {
