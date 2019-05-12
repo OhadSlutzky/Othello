@@ -1,46 +1,43 @@
 ﻿using System;
-
 namespace Player_Data
 {
-    public class PlayersData
+    public class Player
     {
-        private string m_Player1Name;
-        private string m_Player2Name;
+        private string m_PlayerName;
+        private char m_Color;
+        public const char k_Black = 'X';
+        public const char k_White = 'O';
 
-        public PlayersData() { m_Player1Name = null;  m_Player2Name = null; }
-
-        public string M_Player1Name
+        public Player() { m_PlayerName = null; }
+               
+        public string M_PlayerName
         {
             get
             {
-                return m_Player1Name;
+                return m_PlayerName;
             }
             set
             {
-                m_Player1Name = value;
+                m_PlayerName = value;
             }
         }
 
-        public string M_Player2Name
+        public char M_Color
         {
             get
             {
-                return m_Player2Name;
+                return m_Color;
             }
             set
             {
-                m_Player2Name = value;
+                m_Color = value;
             }
         }
 
-        public void SetPlayersNames(string i_Player1Name, string i_Player2Name = null)
+        public void PrintPlayerInfo()
         {
-            m_Player1Name = i_Player1Name;
-
-            if (i_Player2Name != null)
-            {
-                m_Player2Name = i_Player2Name;
-            }
+            string playerInfo = string.Format("{0} {1}", m_PlayerName, m_Color);
+            System.Console.WriteLine(playerInfo);
         }
     }
 }

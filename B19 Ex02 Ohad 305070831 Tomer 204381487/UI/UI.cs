@@ -2,32 +2,84 @@
 {
     public class Console
     {
-        public static void RecieveInputFromUser(Player_Data.PlayersData i_players)
+        public static int RecieveInputFromUser(ref Player_Data.Player[] io_players)
         {
+            int boardSize = 0;
             int numOfPlayers = 0;
-            System.Console.WriteLine("Please enter your name: /n");
-            string player1Name = System.Console.ReadLine();
+            string strNumOfPlayers = null;
+            string strBoardSize = null;
 
-            System.Console.WriteLine("How many players are playing? (enter '1' or '2')");
-            bool parseResult = int.TryParse(System.Console.ReadLine(), out numOfPlayers);
+            io_players[0] = new Player_Data.Player();
+            io_players[1] = new Player_Data.Player();
 
-            if (parseResult == false)
+            System.Console.WriteLine("AT ANY POINT IN THE GAME, ENTER 'Q' TO EXIT\n");
+            System.Console.WriteLine("Please enter your name: ");
+
+            io_players[0].M_PlayerName = System.Console.ReadLine();
+            io_players[0].M_Color = Player_Data.Player.k_Black;
+
+            strNumOfPlayers = RecieveNumOfPlayers();
+
+            bool parseSucceed = int.TryParse(strNumOfPlayers, out numOfPlayers);
+
+            if (parseSucceed == false)//means that the string was "Q"
             {
-                System.Console.WriteLine("There was an Error!\n");
+                System.Console.WriteLine("GOODBYE!!!");
+                System.Environment.Exit(0);
             }
+
             else
             {
                 if (numOfPlayers == 2)
                 {
                     System.Console.WriteLine("Please enter the second player's name: ");
-                    string player2Name = System.Console.ReadLine();
-                    i_players.SetPlayersNames(player1Name, player2Name);
+                    io_players[1].M_PlayerName = System.Console.ReadLine();
                 }
-                else
-                {
-                    i_players.SetPlayersNames(player1Name);
-                }
+                io_players[1].M_PlayerName = "PC";
+                io_players[1].M_Color = Player_Data.Player.k_White;
             }
+
+            strBoardSize = RecieveBoardSize();
+            parseSucceed = int.TryParse(strBoardSize, out boardSize);
+
+            if (parseSucceed == false)//means that the string was "Q"
+            {
+                System.Console.WriteLine("GOODBYE!!!");
+                System.Environment.Exit(0);
+            }
+
+            return boardSize;
+        }
+
+        internal static string RecieveNumOfPlayers()
+        {
+            System.Console.WriteLine("How many players are playing?");
+
+            string userInput = null;
+
+            while (userInput != "1" && userInput != "2" && userInput != "Q")
+            {
+                System.Console.WriteLine("Please enter '1' or '2': ");
+                userInput = System.Console.ReadLine();
+            }
+
+            return userInput;
+        }
+
+        internal static string RecieveBoardSize()
+        {
+            string userInput = null;
+
+            System.Console.WriteLine("What size of board would you like? (6x6 or 8x8)");
+
+            while (userInput != "6" && userInput != "8" && userInput != "Q")
+            {
+                System.Console.WriteLine("Please enter '6' or '8': ");
+                userInput = System.Console.ReadLine();
+            }
+
+            return userInput;
         }
     }
+
 }

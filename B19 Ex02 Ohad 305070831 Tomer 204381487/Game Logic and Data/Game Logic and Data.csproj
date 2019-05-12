@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="Point.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

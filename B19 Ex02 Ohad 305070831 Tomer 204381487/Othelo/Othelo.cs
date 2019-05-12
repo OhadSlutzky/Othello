@@ -6,9 +6,9 @@ namespace Othelo
     {
         public static void Run()
         {
-            Player_Data.PlayersData players = new Player_Data.PlayersData();
-            UI.Console.RecieveInputFromUser(players);
-            Board board = new Game_Logic_and_Data.Board(8);
+            Player_Data.Player[] players = new Player_Data.Player[2];
+            int boardSize = UI.Console.RecieveInputFromUser(ref players);
+            Board board = new Game_Logic_and_Data.Board(boardSize);
             Board.PrintBoard(ref board);
         }
     }
