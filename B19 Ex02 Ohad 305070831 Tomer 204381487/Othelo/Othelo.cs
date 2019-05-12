@@ -10,6 +10,7 @@ namespace Othelo
             int boardSize = UI.Console.RecieveInputFromUser(ref players);
             Board board = new Game_Logic_and_Data.Board(boardSize);
             Board.PrintBoard(ref board);
+            UI.Console.RecievePointFromPlayer()
         }
     }
 }
