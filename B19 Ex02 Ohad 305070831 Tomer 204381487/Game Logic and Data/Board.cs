@@ -137,7 +137,6 @@ namespace Game_Logic_and_Data
             internal const char k_White = 'O';
             internal const char k_Empty = ' ';
 
-
             public Point(int i_longtitude, char i_latitude, char i_cellValue)
             {
                 m_Longtitude = i_longtitude;

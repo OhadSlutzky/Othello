@@ -16,8 +16,13 @@ namespace Game_Logic_and_Data
         public static void OtheloTurnManager(ref Board io_otheloBoard, Player_Data.Player i_player)
         {
             Board tempOtheloBoard = new Board(ref io_otheloBoard);
-
+            Board.Point playersPointChoice;
             UpdateValidCells(ref tempOtheloBoard, i_player.M_Color);
+            //UI - get the point.
+            //check if valid - if not while to get a new point.
+            //put in , and update acordingly.
+            
+
 
         }
 
