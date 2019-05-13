@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Game_Logic_and_Data
+namespace Game_Data
 {
     public class Board
     {
@@ -19,7 +19,7 @@ namespace Game_Logic_and_Data
             {
                 for (char c = 'A'; c < maxBoardLatitude; c++)
                 {
-                    m_OtheloBoard[i, (c - 'A')] = new Point(i + 1, c, i_Board.m_OtheloBoard[i+1,c].M_CellValue);
+                    m_OtheloBoard[i, (int)(c - 'A')] = new Point(i + 1, c, i_Board.m_OtheloBoard[i,(int)(c-'A')].M_CellValue);
                 }
             }
         }
@@ -127,15 +127,20 @@ namespace Game_Logic_and_Data
             }
         }
 
+        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Player_Data.Player i_Player)
+        {
+            return (i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, (int)i_Latitude - 'A'].M_IsAvailableCell == true);
+        }
+
         public class Point
         {
             private bool m_IsAvailableCell = false;
             private int m_Longtitude;
             private char m_Latitude;
             private char m_CellValue;
-            internal const char k_Black = 'X';
-            internal const char k_White = 'O';
-            internal const char k_Empty = ' ';
+            public const char k_Black = 'X';
+            public const char k_White = 'O';
+            public const char k_Empty = ' ';
 
             public Point(int i_longtitude, char i_latitude, char i_cellValue)
             {
@@ -191,6 +196,7 @@ namespace Game_Logic_and_Data
                     m_IsAvailableCell = value;
                 }
             }
+
         }
     }
 }

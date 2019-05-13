@@ -1,5 +1,5 @@
-﻿using Game_Logic_and_Data;
-
+﻿using Game_Data;
+using Game_Logic;
 namespace Othelo
 {
     public class Othelo
@@ -8,9 +8,11 @@ namespace Othelo
         {
             Player_Data.Player[] players = new Player_Data.Player[2];
             int boardSize = UI.Console.RecieveInputFromUser(ref players);
-            Board board = new Game_Logic_and_Data.Board(boardSize);
+            Board board = new Board(boardSize);
             Board.PrintBoard(ref board);
-            UI.Console.RecievePointFromPlayer()
+            TurnManager.OtheloTurnManager(ref board, players[1]);
+
+            //UI.Console.RecievePointFromPlayer();
         }
     }
 }

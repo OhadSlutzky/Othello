@@ -4,15 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{729A2641-3770-4CF7-BE3E-C82D799E2EA1}</ProjectGuid>
+    <ProjectGuid>{FC1F6E8B-CA52-4EE0-AD85-7E51A77A6F69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game_Logic_and_Data</RootNamespace>
-    <AssemblyName>Game Logic and Data</AssemblyName>
+    <RootNamespace>Game_Logic</RootNamespace>
+    <AssemblyName>Game Logic</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,19 +35,20 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Board.cs" />
     <Compile Include="TurnManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Game Logic and Data\Game Data.csproj">
+      <Project>{729a2641-3770-4cf7-be3e-c82d799e2ea1}</Project>
+      <Name>Game Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Player Data\Player Data.csproj">
       <Project>{fb759fb4-6f2e-41df-93c7-54c0b1880aee}</Project>
       <Name>Player Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{d92e9db1-3fac-49ae-8749-8bbc7ed7f672}</Project>
+      <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

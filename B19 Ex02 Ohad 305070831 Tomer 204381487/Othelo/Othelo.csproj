@@ -46,9 +46,13 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game Logic and Data\Game Logic and Data.csproj">
+    <ProjectReference Include="..\Game Logic and Data\Game Data.csproj">
       <Project>{729a2641-3770-4cf7-be3e-c82d799e2ea1}</Project>
-      <Name>Game Logic and Data</Name>
+      <Name>Game Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game Logic\Game Logic.csproj">
+      <Project>{fc1f6e8b-ca52-4ee0-ad85-7e51a77a6f69}</Project>
+      <Name>Game Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Player Data\Player Data.csproj">
       <Project>{fb759fb4-6f2e-41df-93c7-54c0b1880aee}</Project>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D92E9DB1-3FAC-49AE-8749-8BBC7ED7F672}</ProjectGuid>
+    <ProjectGuid>{729A2641-3770-4CF7-BE3E-C82D799E2EA1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UI</RootNamespace>
-    <AssemblyName>UI</AssemblyName>
+    <RootNamespace>Game_Logic_and_Data</RootNamespace>
+    <AssemblyName>Game Logic and Data</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -40,19 +40,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI.cs" />
+    <Compile Include="Board.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>..\..\..\..\..\..\..\..\..\Temp\Ex02.ConsoleUtils.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game Logic and Data\Game Data.csproj">
-      <Project>{729a2641-3770-4cf7-be3e-c82d799e2ea1}</Project>
-      <Name>Game Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Player Data\Player Data.csproj">
       <Project>{fb759fb4-6f2e-41df-93c7-54c0b1880aee}</Project>
       <Name>Player Data</Name>
