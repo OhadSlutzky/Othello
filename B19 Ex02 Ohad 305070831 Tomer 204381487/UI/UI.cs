@@ -35,7 +35,11 @@
                     System.Console.WriteLine("Please enter the second player's name: ");
                     io_players[1].M_PlayerName = System.Console.ReadLine();
                 }
-                io_players[1].M_PlayerName = "PC";
+                else
+                {
+                    io_players[1].M_PlayerName = "PC";
+                }
+
                 io_players[1].M_Color = Player_Data.Player.k_Black;
             }
 
@@ -113,6 +117,7 @@
 
             if (userInput == "Q")
             {
+                System.Console.WriteLine("\nGOODBYE!!");
                 System.Environment.Exit(0);
             }
 
@@ -127,6 +132,68 @@
         public static void ClearScreen()
         {
             Ex02.ConsoleUtils.Screen.Clear();
+        }
+
+        public static void PrintBoard(Game_Data.Board i_otheloBoard)
+        {
+            Game_Data.Board.PrintBoard(i_otheloBoard);
+        }
+
+        public static bool AskIfPlayAgain()
+        {
+            string userInput = null;
+            bool anotherGame = false;   
+            System.Console.WriteLine("Would you like to have another game?");
+
+            while (userInput != "yes" && userInput != "no" && userInput != "Q")
+            {
+                System.Console.WriteLine("Please enter 'yes' or 'no'");
+                userInput = System.Console.ReadLine();
+
+                if (userInput.Equals("yes"))
+                {
+                    anotherGame = true;
+                }
+                else if (userInput.Equals("no") || userInput.Equals("Q"))
+                {
+                    anotherGame = false;
+                }
+            }
+
+            return anotherGame;
+        }
+
+        public static void PrintFinalScore(Player_Data.Player i_player1, Player_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
+        {
+            string message = string.Format(
+@"  ______ _____ _   _          _             _____  _____ ____  _____  ______ 
+ |  ____|_   _| \ | |   /\   | |           / ____|/ ____/ __ \|  __ \|  ____|
+ | |__    | | |  \| |  /  \  | |  ______  | (___ | |   | |  | | |__) | |__   
+ |  __|   | | | . ` | / /\ \ | | |______|  \___ \| |   | |  | |  _  /|  __|  
+ | |     _| |_| |\  |/ ____ \| |____       ____) | |___| |__| | | \ \| |____ 
+ |_|    |_____|_| \_/_/    \_\______|     |_____/ \_____\____/|_|  \_\______|
+
+
+
+            
+          {0}          {1}
+            {2}             {3}
+
+", i_player1.M_PlayerName, i_player2.M_PlayerName, i_player1NumberOfDiscs, i_player2NumberOfDiscs);
+            System.Console.WriteLine(message);
+
+            if (i_player1NumberOfDiscs > i_player2NumberOfDiscs)
+            {
+                string winner = string.Format("{0} IS THE WINNER!!", i_player1.M_PlayerName);
+            }
+            else if (i_player1NumberOfDiscs < i_player2NumberOfDiscs)
+            {
+                string winner = string.Format("{0} IS THE WINNER!!", i_player2.M_PlayerName);
+            }
+            else
+            {
+                System.Console.WriteLine("IT IS A TIE!!\nUNBELIVABLE!!");
+            }
         }
     }
 }

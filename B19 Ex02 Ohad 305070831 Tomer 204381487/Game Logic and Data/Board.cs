@@ -74,6 +74,11 @@ namespace Game_Data
                 m_OtheloBoard[3, 4].M_CellValue = Point.k_Black;
                 m_OtheloBoard[4, 3].M_CellValue = Point.k_Black;
                 m_OtheloBoard[4, 4].M_CellValue = Point.k_White;
+
+                m_OtheloBoard[3, 3].M_IsAvailableCell = false;
+                m_OtheloBoard[3, 4].M_IsAvailableCell = false;
+                m_OtheloBoard[4, 3].M_IsAvailableCell = false;
+                m_OtheloBoard[4, 4].M_IsAvailableCell = false;
             }
             else if (m_BoardSize == 6)
             {
@@ -81,16 +86,21 @@ namespace Game_Data
                 m_OtheloBoard[2, 3].M_CellValue = Point.k_Black;
                 m_OtheloBoard[3, 2].M_CellValue = Point.k_Black;
                 m_OtheloBoard[3, 3].M_CellValue = Point.k_White;
+
+                m_OtheloBoard[2, 2].M_IsAvailableCell = false;
+                m_OtheloBoard[2, 3].M_IsAvailableCell = false;
+                m_OtheloBoard[3, 2].M_IsAvailableCell = false;
+                m_OtheloBoard[3, 3].M_IsAvailableCell = false;
             }
         }
 
-        public static void PrintBoard(ref Board io_otheloBoard)
+        public static void PrintBoard(Board i_otheloBoard)
         {
-            for (int i = 0; i < io_otheloBoard.m_BoardSize; i++)
+            for (int i = 0; i < i_otheloBoard.m_BoardSize; i++)
             {
                 if (i == 0)
                 {
-                    if (io_otheloBoard.m_BoardSize == 8)
+                    if (i_otheloBoard.m_BoardSize == 8)
                     {
                         Console.WriteLine("    A   B   C   D   E   F   G   H");
                         Console.WriteLine("  =================================");
@@ -102,21 +112,21 @@ namespace Game_Data
                     }
                 }
 
-                for (char c = 'A'; c < (char)('A' + io_otheloBoard.m_BoardSize); c++)
+                for (char c = 'A'; c < (char)('A' + i_otheloBoard.m_BoardSize); c++)
                 {
                     if (c == 'A')
                     {
-                        string outputMessage = string.Format("{0} | {1} |", i + 1, io_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        string outputMessage = string.Format("{0} | {1} |", i + 1, i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
                         Console.Write(outputMessage);
                     }
                     else
                     {
-                        string outputMessage = string.Format(" {0} |",io_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        string outputMessage = string.Format(" {0} |", i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
                         Console.Write(outputMessage);
                     }
                 }
 
-                if (io_otheloBoard.m_BoardSize == 8)
+                if (i_otheloBoard.m_BoardSize == 8)
                 {
                     Console.WriteLine("\n  =================================");
                 }
@@ -130,6 +140,21 @@ namespace Game_Data
         public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Player_Data.Player i_Player)
         {
             return (i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, (int)i_Latitude - 'A'].M_IsAvailableCell == true);
+        }
+
+        public void CountNumberOfDiscsForBothPlayers(ref int player1NumberOfDiscs, ref int player2NumberOfDiscs)
+        {
+            foreach (Board.Point currentPoint in m_OtheloBoard)
+            {
+                if (currentPoint.M_CellValue == Point.k_White)
+                {
+                    player1NumberOfDiscs += 1;
+                }
+                else if(currentPoint.M_CellValue == Point.k_Black)
+                {
+                    player2NumberOfDiscs += 1;
+                }
+            }
         }
 
         public class Point
