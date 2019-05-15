@@ -43,9 +43,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Othelo\Othelo.csproj">
+    <ProjectReference Include="..\Othelo\Othello.csproj">
       <Project>{4479911b-5d6a-44e4-aa92-389fd93d7dae}</Project>
-      <Name>Othelo</Name>
+      <Name>Othello</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

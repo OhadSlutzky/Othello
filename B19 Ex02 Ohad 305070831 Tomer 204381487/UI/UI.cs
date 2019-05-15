@@ -1,22 +1,24 @@
-﻿namespace UI
+﻿using System.Collections.Generic;
+
+namespace UI
 {
     public class Console
     {
-        public static int RecieveInputFromUser(ref Player_Data.Player[] io_players)
+        public static int RecieveInputFromUser(ref Game_Data.Player[] io_players)
         {
             int boardSize = 0;
             int numOfPlayers = 0;
             string strNumOfPlayers = null;
             string strBoardSize = null;
 
-            io_players[0] = new Player_Data.Player();
-            io_players[1] = new Player_Data.Player();
+            io_players[0] = new Game_Data.Player();
+            io_players[1] = new Game_Data.Player();
 
             System.Console.WriteLine("AT ANY POINT IN THE GAME, ENTER 'Q' TO EXIT\n");
             System.Console.WriteLine("Please enter your name: ");
 
             io_players[0].M_PlayerName = System.Console.ReadLine();
-            io_players[0].M_Color = Player_Data.Player.k_White;
+            io_players[0].M_Color = Game_Data.Player.k_White;
 
             strNumOfPlayers = RecieveNumOfPlayers();
 
@@ -40,7 +42,7 @@
                     io_players[1].M_PlayerName = "PC";
                 }
 
-                io_players[1].M_Color = Player_Data.Player.k_Black;
+                io_players[1].M_Color = Game_Data.Player.k_Black;
             }
 
             strBoardSize = RecieveBoardSize();
@@ -86,39 +88,48 @@
             return userInput;
         }
 
-        public static Game_Data.Board.Point RecievePointFromPlayer(Game_Data.Board i_otheloBoard, Player_Data.Player i_Player)
+        public static Game_Data.Board.Point RecievePointFromPlayer(Game_Data.Board i_otheloBoard, Game_Data.Player i_Player, List<Game_Data.Board.Point> i_validPointsToChooseFrom)
         {
             Game_Data.Board.Point o_PlayerChosenPoint = null;
-            string userInput = null; ///MIGHT CRASH BECAUSE USERINPUT[1] AND USERINPUT[3] DON'T EXIST
-            string message = null;
+            string userInput = null;
             bool availablePoint = false;
 
-            message = string.Format("Please enter the point in the following form - int,char when int is between 1 - {0} and char between A - {1}", i_otheloBoard.M_BoardSize, (char)('A' + i_otheloBoard.M_BoardSize));
+            string message = string.Format("It is {0}'s turn ({1})!", i_Player.M_PlayerName, i_Player.M_Color);
             System.Console.WriteLine(message);
-            
-            while (availablePoint == false && userInput != "Q")
-            {
-                System.Console.WriteLine("Please place your disc by choosing a cell\nin such a way that there is at least one straight (horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs.");
-                userInput = System.Console.ReadLine();
 
-                if (IsValidInput(userInput, i_otheloBoard.M_BoardSize))
+            if (i_Player.M_PlayerName != "PC")
+            {
+                while (availablePoint == false && userInput != "Q")
                 {
-                    if (Game_Data.Board.IsValidDiscPlacement(i_otheloBoard, int.Parse(userInput[0].ToString()), userInput[2], i_Player))
+                    System.Console.WriteLine("Please choose a point to place your disc in from the following options: ");
+                    UI.Console.PrintValidPointsForPlayer(i_validPointsToChooseFrom);
+                    userInput = System.Console.ReadLine();
+
+                    if (IsValidInput(userInput, i_otheloBoard.M_BoardSize))
                     {
-                        o_PlayerChosenPoint = new Game_Data.Board.Point(int.Parse(userInput[0].ToString()), userInput[2], i_Player.M_Color);
-                        availablePoint = true;
-                    }
-                    else
-                    {
-                        System.Console.WriteLine("You can't place a disc there!");
+                        if (Game_Data.Board.IsValidDiscPlacement(i_otheloBoard, int.Parse(userInput[0].ToString()), userInput[2], i_Player))
+                        {
+                            o_PlayerChosenPoint = new Game_Data.Board.Point(int.Parse(userInput[0].ToString()), userInput[2], i_Player.M_Color);
+                            availablePoint = true;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("--------------------------------------------------\nYou can't place a disc there!");
+                            System.Console.WriteLine("Please place your disc by choosing a cell in such a way that there is at least one straight\n(horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs.");
+                        }
                     }
                 }
-            }
 
-            if (userInput == "Q")
+                if (userInput == "Q")
+                {
+                    System.Console.WriteLine("\nGOODBYE!!");
+                    System.Environment.Exit(0);
+                }
+            }
+            else   ///It's PC's turn
             {
-                System.Console.WriteLine("\nGOODBYE!!");
-                System.Environment.Exit(0);
+                System.Random rand = new System.Random();
+                o_PlayerChosenPoint = i_validPointsToChooseFrom[rand.Next(i_validPointsToChooseFrom.Count)];
             }
 
             return o_PlayerChosenPoint;
@@ -163,7 +174,7 @@
             return anotherGame;
         }
 
-        public static void PrintFinalScore(Player_Data.Player i_player1, Player_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
+        public static void PrintFinalScore(Game_Data.Player i_player1, Game_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
         {
             string message = string.Format(
 @"  ______ _____ _   _          _             _____  _____ ____  _____  ______ 
@@ -198,6 +209,20 @@ i_player2NumberOfDiscs);
             {
                 System.Console.WriteLine("IT IS A TIE!!\nUNBELIVABLE!!");
             }
+        }
+
+        public static void PrintValidPointsForPlayer(List<Game_Data.Board.Point> validPointsToChooseFrom)
+        {
+            System.Text.StringBuilder o_stringValidPoints = new System.Text.StringBuilder(7);
+            string message = null;
+
+            foreach(Game_Data.Board.Point currentPoint in validPointsToChooseFrom)
+            {
+                message = string.Format("{0},{1}   ", currentPoint.M_Longtitude, currentPoint.M_Latitude);
+                o_stringValidPoints.Append(message);
+            }
+
+            System.Console.WriteLine(o_stringValidPoints);
         }
     }
 }

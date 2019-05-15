@@ -50,7 +50,7 @@ namespace Game_Data
             }
         }
 
-        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Player_Data.Player i_Player)
+        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Game_Data.Player i_Player)
         {
             return i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, i_Latitude - 'A'].M_IsAvailableCell == true; ///styleCop took down the (int) cast! !
         }
@@ -156,6 +156,14 @@ namespace Game_Data
             }
         }
 
+        public void ResetPointsValidityToFalse()
+        {
+            foreach(Point currentPoint in m_OtheloBoard)
+            {
+                currentPoint.M_IsAvailableCell = false;
+            }
+        }
+
         public class Point
         {
             private bool m_IsAvailableCell = false;
@@ -224,6 +232,51 @@ namespace Game_Data
                     m_IsAvailableCell = value;
                 }
             }
+        }
+    }
+
+    public class Player
+    {
+        private string m_PlayerName;
+        private char m_Color;
+        public const char k_Black = 'X';
+        public const char k_White = 'O';
+
+        public Player()
+        {
+            m_PlayerName = null;
+        }
+
+        public string M_PlayerName
+        {
+            get
+            {
+                return m_PlayerName;
+            }
+
+            set
+            {
+                m_PlayerName = value;
+            }
+        }
+
+        public char M_Color
+        {
+            get
+            {
+                return m_Color;
+            }
+
+            set
+            {
+                m_Color = value;
+            }
+        }
+
+        public void PrintPlayerInfo()
+        {
+            string playerInfo = string.Format("{0} {1}", m_PlayerName, m_Color);
+            System.Console.WriteLine(playerInfo);
         }
     }
 }

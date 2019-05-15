@@ -42,10 +42,6 @@
       <Project>{729a2641-3770-4cf7-be3e-c82d799e2ea1}</Project>
       <Name>Game Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Player Data\Player Data.csproj">
-      <Project>{fb759fb4-6f2e-41df-93c7-54c0b1880aee}</Project>
-      <Name>Player Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{d92e9db1-3fac-49ae-8749-8bbc7ed7f672}</Project>
       <Name>UI</Name>

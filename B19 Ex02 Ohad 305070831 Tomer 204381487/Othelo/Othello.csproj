@@ -40,7 +40,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Othelo.cs" />
+    <Compile Include="Othello.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,10 +53,6 @@
     <ProjectReference Include="..\Game Logic\Game Logic.csproj">
       <Project>{fc1f6e8b-ca52-4ee0-ad85-7e51a77a6f69}</Project>
       <Name>Game Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Player Data\Player Data.csproj">
-      <Project>{fb759fb4-6f2e-41df-93c7-54c0b1880aee}</Project>
-      <Name>Player Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{d92e9db1-3fac-49ae-8749-8bbc7ed7f672}</Project>
