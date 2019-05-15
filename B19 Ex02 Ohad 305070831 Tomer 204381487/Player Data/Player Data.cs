@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Player_Data
 {
     public class Player
@@ -8,7 +9,10 @@ namespace Player_Data
         public const char k_Black = 'X';
         public const char k_White = 'O';
 
-        public Player() { m_PlayerName = null; }
+        public Player()
+        {
+            m_PlayerName = null;
+        }
                
         public string M_PlayerName
         {
@@ -16,6 +20,7 @@ namespace Player_Data
             {
                 return m_PlayerName;
             }
+
             set
             {
                 m_PlayerName = value;
@@ -28,6 +33,7 @@ namespace Player_Data
             {
                 return m_Color;
             }
+
             set
             {
                 m_Color = value;

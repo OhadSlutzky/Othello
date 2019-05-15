@@ -11,8 +11,10 @@ namespace Game_Logic
         private const string k_UpdateValidity = "UpdateCellValidity";
         private const string k_ChangeRivalDiscsCellsColor = "ChangeDiscsColor";
 
-
-        public enum eDirection {Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft }
+        public enum eDirection
+        {
+            Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft
+        }
 
         public static void OtheloTurnManager(ref Game_Data.Board io_otheloBoard, Player_Data.Player i_player, ref int io_consecutiveNumberOfTurnsWithoutValidMoves)
         {
@@ -62,7 +64,7 @@ namespace Game_Logic
                 case eDirection.Up:
                     if (UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard,i_currentPoint, k_Decrease, k_DontMove , ref io_numberOfValidPlacementPoints);
+                        UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, ref io_numberOfValidPlacementPoints);
                     }
                     else
                     {
@@ -71,6 +73,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.UpRight:
@@ -85,6 +88,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.Right:
@@ -99,6 +103,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.DownRight:
@@ -113,6 +118,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Increase, k_Increase, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.Down:
@@ -127,6 +133,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.DownLeft:
@@ -141,6 +148,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint,  k_Increase, k_Decrease, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.Left:
@@ -155,6 +163,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
 
                 case eDirection.UpLeft:
@@ -169,6 +178,7 @@ namespace Game_Logic
                             ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, ref io_numberOfValidPlacementPoints);
                         }
                     }
+
                     break;
             }
         }
@@ -195,7 +205,7 @@ namespace Game_Logic
 
         public static bool IsPointOnBoardAndRivalDisc(Board i_otheloBoard, int i_longtitude, int i_latitude, char i_playerColor)
         {
-            return (i_latitude >= 0 && i_latitude < i_otheloBoard.M_BoardSize && i_longtitude >= 0 && i_longtitude < i_otheloBoard.M_BoardSize && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != i_playerColor && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != Board.Point.k_Empty);
+            return i_latitude >= 0 && i_latitude < i_otheloBoard.M_BoardSize && i_longtitude >= 0 && i_longtitude < i_otheloBoard.M_BoardSize && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != i_playerColor && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != Board.Point.k_Empty;
         }
 
         public static bool IsRivalDiscChangeNeeded(ref Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeValue, int i_latitudeValue, ref int io_numberOfRivalDiscsToChange)
@@ -228,7 +238,7 @@ namespace Game_Logic
 
             for (int i = 1; i <= io_numberOfRivalDiscsToChange; i++)
             {
-                io_otheloBoard.M_OtheloBoard[startLongtitude + i * i_longtitudeVal, startLatitude + i * i_latitudeVal].M_CellValue = i_currentPoint.M_CellValue;
+                io_otheloBoard.M_OtheloBoard[startLongtitude + (i * i_longtitudeVal), startLatitude + (i * i_latitudeVal)].M_CellValue = i_currentPoint.M_CellValue;
             }
 
             io_numberOfRivalDiscsToChange = 0;
@@ -245,99 +255,3 @@ namespace Game_Logic
         }
     }
 }
-
-
-/*
-public static void CheckValidityUp(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = i_currentPoint.M_Latitude - 'A';
-    int longtitude = i_currentPoint.M_Longtitude - 1;
-    while (longtitude >= 0 && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        longtitude -= 1;
-    }
-
-    if (longtitude >= 0)
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-
-public static void CheckValidityUpRight(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = (i_currentPoint.M_Latitude - 'A') + 1;
-    int longtitude = i_currentPoint.M_Longtitude - 1;
-    while (latitude < io_otheloBoard.M_BoardSize && longtitude >= 0 && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        longtitude -= 1;
-        latitude += 1;
-    }
-
-    if (longtitude >= 0 && latitude <= io_otheloBoard.M_BoardSize)
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-
-public static void CheckValidityRight(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = i_currentPoint.M_Latitude - 'A' + 1;
-    int longtitude = i_currentPoint.M_Longtitude;
-    while (longtitude >= 0 && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        latitude += 1;
-    }
-
-    if (latitude < io_otheloBoard.M_BoardSize) 
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-
-public static void CheckValidityDownRight(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = (i_currentPoint.M_Latitude - 'A') + 1;
-    int longtitude = i_currentPoint.M_Longtitude + 1;
-    while (latitude < io_otheloBoard.M_BoardSize && longtitude < io_otheloBoard.M_BoardSize && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        longtitude += 1;
-        latitude += 1;
-    }
-
-    if (latitude < io_otheloBoard.M_BoardSize && longtitude < io_otheloBoard.M_BoardSize)
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-
-public static void CheckValidityDown(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = i_currentPoint.M_Latitude - 'A';
-    int longtitude = i_currentPoint.M_Longtitude + 1;
-    while (longtitude < io_otheloBoard.M_BoardSize && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        longtitude += 1;
-    }
-
-    if (longtitude < io_otheloBoard.M_BoardSize)
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-
-public static void CheckValidityDownLeft(ref Board io_otheloBoard, Board.Point i_currentPoint)
-{
-    int latitude = (i_currentPoint.M_Latitude - 'A') - 1;
-    int longtitude = i_currentPoint.M_Longtitude + 1;
-    while (latitude >= 0 && longtitude < io_otheloBoard.M_BoardSize && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue) && (io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != Board.Point.k_Empty))
-    {
-        longtitude += 1;
-        latitude -= 1;
-    }
-
-    if (latitude >= 0 && longtitude < io_otheloBoard.M_BoardSize)
-    {
-        io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_IsAvailableCell = true;
-    }
-}
-*/

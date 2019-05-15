@@ -22,12 +22,12 @@
 
             bool parseSucceed = int.TryParse(strNumOfPlayers, out numOfPlayers);
 
-            if (parseSucceed == false)//means that the string was "Q"
+            if (parseSucceed == false)
             {
+                ///means that the string was "Q"
                 System.Console.WriteLine("GOODBYE!!!");
                 System.Environment.Exit(0);
             }
-
             else
             {
                 if (numOfPlayers == 2)
@@ -46,8 +46,9 @@
             strBoardSize = RecieveBoardSize();
             parseSucceed = int.TryParse(strBoardSize, out boardSize);
 
-            if (parseSucceed == false)//means that the string was "Q"
+            if (parseSucceed == false)
             {
+                ///means that the string was "Q"
                 System.Console.WriteLine("GOODBYE!!!");
                 System.Environment.Exit(0);
             }
@@ -88,7 +89,7 @@
         public static Game_Data.Board.Point RecievePointFromPlayer(Game_Data.Board i_otheloBoard, Player_Data.Player i_Player)
         {
             Game_Data.Board.Point o_PlayerChosenPoint = null;
-            string userInput = null; //MIGHT CRASH BECAUSE USERINPUT[1] AND USERINPUT[3] DON'T EXIST
+            string userInput = null; ///MIGHT CRASH BECAUSE USERINPUT[1] AND USERINPUT[3] DON'T EXIST
             string message = null;
             bool availablePoint = false;
 
@@ -102,7 +103,6 @@
 
                 if (IsValidInput(userInput, i_otheloBoard.M_BoardSize))
                 {
-                    //IsValidDiscPlacement
                     if (Game_Data.Board.IsValidDiscPlacement(i_otheloBoard, int.Parse(userInput[0].ToString()), userInput[2], i_Player))
                     {
                         o_PlayerChosenPoint = new Game_Data.Board.Point(int.Parse(userInput[0].ToString()), userInput[2], i_Player.M_Color);
@@ -126,7 +126,7 @@
         
         internal static bool IsValidInput(string i_userInput, int i_boardSize)
         {
-            return (i_userInput.Length == 3 && i_userInput[1] == ',' && i_userInput[0] >= '0' && i_userInput[0] <= (char)(i_boardSize + '0') && i_userInput[2] >= 'A' && i_userInput[2] <= (char)(i_boardSize + 'A'));
+            return i_userInput.Length == 3 && i_userInput[1] == ',' && i_userInput[0] >= '0' && i_userInput[0] <= (char)(i_boardSize + '0') && i_userInput[2] >= 'A' && i_userInput[2] <= (char)(i_boardSize + 'A');
         }
 
         public static void ClearScreen()
@@ -179,7 +179,11 @@
           {0}          {1}
             {2}             {3}
 
-", i_player1.M_PlayerName, i_player2.M_PlayerName, i_player1NumberOfDiscs, i_player2NumberOfDiscs);
+",
+i_player1.M_PlayerName,
+i_player2.M_PlayerName,
+i_player1NumberOfDiscs,
+i_player2NumberOfDiscs);
             System.Console.WriteLine(message);
 
             if (i_player1NumberOfDiscs > i_player2NumberOfDiscs)

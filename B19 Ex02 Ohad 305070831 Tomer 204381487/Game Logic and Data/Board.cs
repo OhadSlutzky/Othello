@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Game_Data
 {
     public class Board
@@ -8,18 +7,64 @@ namespace Game_Data
         private int m_BoardSize;
         private Point[,] m_OtheloBoard;
 
+        public static void PrintBoard(Board i_otheloBoard)
+        {
+            for (int i = 0; i < i_otheloBoard.m_BoardSize; i++)
+            {
+                if (i == 0)
+                {
+                    if (i_otheloBoard.m_BoardSize == 8)
+                    {
+                        Console.WriteLine("    A   B   C   D   E   F   G   H");
+                        Console.WriteLine("  =================================");
+                    }
+                    else
+                    {
+                        Console.WriteLine("    A   B   C   D   E   F");
+                        Console.WriteLine("  =========================");
+                    }
+                }
+
+                for (char c = 'A'; c < (char)('A' + i_otheloBoard.m_BoardSize); c++)
+                {
+                    if (c == 'A')
+                    {
+                        string outputMessage = string.Format("{0} | {1} |", i + 1, i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        Console.Write(outputMessage);
+                    }
+                    else
+                    {
+                        string outputMessage = string.Format(" {0} |", i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        Console.Write(outputMessage);
+                    }
+                }
+
+                if (i_otheloBoard.m_BoardSize == 8)
+                {
+                    Console.WriteLine("\n  =================================");
+                }
+                else
+                {
+                    Console.WriteLine("\n  =========================");
+                }
+            }
+        }
+
+        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Player_Data.Player i_Player)
+        {
+            return i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, i_Latitude - 'A'].M_IsAvailableCell == true; ///styleCop took down the (int) cast! !
+        }
+
         public Board(ref Board i_Board)
         {
             m_BoardSize = i_Board.M_BoardSize;
             m_OtheloBoard = new Point[m_BoardSize, m_BoardSize];
-
             char maxBoardLatitude = (char)('A' + m_BoardSize);
-
             for (int i = 0; i < m_BoardSize; i++)
             {
                 for (char c = 'A'; c < maxBoardLatitude; c++)
                 {
-                    m_OtheloBoard[i, (int)(c - 'A')] = new Point(i + 1, c, i_Board.m_OtheloBoard[i,(int)(c-'A')].M_CellValue);
+                    m_OtheloBoard[i, (int)(c - 'A')] = new Point(i + 1, c, i_Board.m_OtheloBoard[i, (int)(c - 'A')].M_CellValue);
                 }
             }
         }
@@ -30,6 +75,7 @@ namespace Game_Data
             {
                 return m_BoardSize;
             }
+
             set
             {
                 m_BoardSize = value;
@@ -42,6 +88,7 @@ namespace Game_Data
             {
                 return m_OtheloBoard;
             }
+
             set
             {
                 m_OtheloBoard = value;
@@ -94,54 +141,6 @@ namespace Game_Data
             }
         }
 
-        public static void PrintBoard(Board i_otheloBoard)
-        {
-            for (int i = 0; i < i_otheloBoard.m_BoardSize; i++)
-            {
-                if (i == 0)
-                {
-                    if (i_otheloBoard.m_BoardSize == 8)
-                    {
-                        Console.WriteLine("    A   B   C   D   E   F   G   H");
-                        Console.WriteLine("  =================================");
-                    }
-                    else
-                    {
-                        Console.WriteLine("    A   B   C   D   E   F");
-                        Console.WriteLine("  =========================");
-                    }
-                }
-
-                for (char c = 'A'; c < (char)('A' + i_otheloBoard.m_BoardSize); c++)
-                {
-                    if (c == 'A')
-                    {
-                        string outputMessage = string.Format("{0} | {1} |", i + 1, i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
-                        Console.Write(outputMessage);
-                    }
-                    else
-                    {
-                        string outputMessage = string.Format(" {0} |", i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
-                        Console.Write(outputMessage);
-                    }
-                }
-
-                if (i_otheloBoard.m_BoardSize == 8)
-                {
-                    Console.WriteLine("\n  =================================");
-                }
-                else
-                {
-                    Console.WriteLine("\n  =========================");
-                }
-            }
-        }
-
-        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Player_Data.Player i_Player)
-        {
-            return (i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, (int)i_Latitude - 'A'].M_IsAvailableCell == true);
-        }
-
         public void CountNumberOfDiscsForBothPlayers(ref int player1NumberOfDiscs, ref int player2NumberOfDiscs)
         {
             foreach (Board.Point currentPoint in m_OtheloBoard)
@@ -180,6 +179,7 @@ namespace Game_Data
                 {
                     return m_Longtitude;
                 }
+
                 set
                 {
                     m_Longtitude = value;
@@ -192,6 +192,7 @@ namespace Game_Data
                 {
                     return m_Latitude;
                 }
+
                 set
                 {
                     m_Latitude = value;
@@ -204,6 +205,7 @@ namespace Game_Data
                 {
                     return m_CellValue;
                 }
+
                 set
                 {
                     m_CellValue = value;
@@ -216,12 +218,12 @@ namespace Game_Data
                 {
                     return m_IsAvailableCell;
                 }
+
                 set
                 {
                     m_IsAvailableCell = value;
                 }
             }
-
         }
     }
 }

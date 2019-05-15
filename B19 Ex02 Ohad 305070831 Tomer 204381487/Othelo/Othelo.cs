@@ -1,5 +1,6 @@
 ﻿using Game_Data;
 using Game_Logic;
+
 namespace Othelo
 {
     public class Othelo
