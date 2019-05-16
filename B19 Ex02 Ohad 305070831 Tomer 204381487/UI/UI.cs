@@ -127,7 +127,7 @@ namespace UI
                         else
                         {
                             System.Console.WriteLine("--------------------------------------------------\nYou can't place a disc there!");
-                            System.Console.WriteLine("Please place your disc by choosing a cell in such a way that there is at least one straight\n(horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs.");
+                            System.Console.WriteLine("Please place your disc on the board by choosing a cell, in such a way that there is at least one straight (horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs, with one or more contiguous rival pieces between them.");
                         }
                     }
                     else if(userInput != "Q")
@@ -143,7 +143,7 @@ namespace UI
             }
             else 
             {
-            // It's PC's turn
+                /// It's PC's turn
                 System.Random rand = new System.Random();
                 o_PlayerChosenPoint = i_validPointsToChooseFrom[rand.Next(i_validPointsToChooseFrom.Count)];
             }
@@ -203,7 +203,7 @@ namespace UI
 
 
 
-{0} ({1}) : {2}  Vs  {3} ({4}) : {5}
+{0} ('{1}') : {2}  Vs  {3} ('{4}') : {5}
 
 ",
 i_player1.M_PlayerName,

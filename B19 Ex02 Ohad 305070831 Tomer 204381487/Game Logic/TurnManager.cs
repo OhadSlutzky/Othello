@@ -43,7 +43,7 @@ namespace Game_Logic
             }
             else
             {
-                string message = string.Format("{0} HAS NO MOVES!", i_player.M_PlayerName);
+                string message = string.Format("{0} has no optional moves!", i_player.M_PlayerName);
                 System.Console.WriteLine(message);
                 io_consecutiveNumberOfTurnsWithoutValidMoves += 1;
             }
@@ -250,7 +250,6 @@ namespace Game_Logic
 
             for (int i = 1; i <= i_numberOfRivalDiscsToChange; i++)
             {
-                ///if ()
                 io_otheloBoard.M_OtheloBoard[startLongtitude + (i * i_longtitudeVal), startLatitude + (i * i_latitudeVal)].M_CellValue = i_currentPoint.M_CellValue;
             }
         }
