@@ -48,6 +48,7 @@ namespace Game_Data
                     Console.WriteLine("\n  =========================");
                 }
             }
+            Console.WriteLine();
         }
 
         public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Game_Data.Player i_Player)

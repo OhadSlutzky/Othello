@@ -34,6 +34,7 @@ namespace Othello
                 }
 
                 board.CountNumberOfDiscsForBothPlayers(ref player1NumberOfDiscs, ref player2NumberOfDiscs);
+                System.Threading.Thread.Sleep(1500);
                 UI.Console.PrintFinalScore(players[0], players[1], player1NumberOfDiscs, player2NumberOfDiscs);
                 anotherGame = UI.Console.AskIfPlayAgain();
                 System.Threading.Thread.Sleep(2000);

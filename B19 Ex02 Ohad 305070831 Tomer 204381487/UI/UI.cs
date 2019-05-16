@@ -202,9 +202,7 @@ namespace UI
 
 
 
-            
-          {0}          {1}
-           {2}           {3}
+{0} : {2}  Vs  {1} : {3}
 
 ",
 i_player1.M_PlayerName,
