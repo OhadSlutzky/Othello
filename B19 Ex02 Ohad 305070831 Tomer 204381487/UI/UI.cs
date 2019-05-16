@@ -4,7 +4,7 @@ namespace UI
 {
     public class Console
     {
-        public static int RecieveInputFromUser(ref Game_Data.Player[] io_players)
+        public static int RecieveInputFromUser(Game_Data.Player[] io_players)
         {
             int boardSize = 0;
             int numOfPlayers = 0;
@@ -25,7 +25,7 @@ namespace UI
             }
 
             io_players[0].M_PlayerName = userInput;
-            io_players[0].M_Color = Game_Data.Player.k_White;
+            io_players[0].M_Color = Game_Data.Player.k_Black;
 
             strNumOfPlayers = RecieveNumOfPlayers();
 
@@ -55,7 +55,7 @@ namespace UI
                     io_players[1].M_PlayerName = "PC";
                 }
 
-                io_players[1].M_Color = Game_Data.Player.k_Black;
+                io_players[1].M_Color = Game_Data.Player.k_White;
             }
 
             strBoardSize = RecieveBoardSize();
@@ -192,7 +192,7 @@ namespace UI
         public static void PrintFinalScore(Game_Data.Player i_player1, Game_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
         {
             string winnerMessage = null;
-            string message = string.Format(
+            string finalScoreMessage = string.Format(
 @"  ______ _____ _   _          _             _____  _____ ____  _____  ______ 
  |  ____|_   _| \ | |   /\   | |           / ____|/ ____/ __ \|  __ \|  ____|
  | |__    | | |  \| |  /  \  | |  ______  | (___ | |   | |  | | |__) | |__   
@@ -202,14 +202,17 @@ namespace UI
 
 
 
-{0} : {2}  Vs  {1} : {3}
+{0} ({1}) : {2}  Vs  {3} ({4}) : {5}
 
 ",
 i_player1.M_PlayerName,
-i_player2.M_PlayerName,
+i_player1.M_Color,
 i_player1NumberOfDiscs,
+i_player2.M_PlayerName,
+i_player2.M_Color,
 i_player2NumberOfDiscs);
-            System.Console.WriteLine(message);
+
+            System.Console.WriteLine(finalScoreMessage);
 
             if (i_player1NumberOfDiscs > i_player2NumberOfDiscs)
             {

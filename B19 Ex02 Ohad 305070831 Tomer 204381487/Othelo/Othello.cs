@@ -17,7 +17,7 @@ namespace Othello
             UI.Console.ClearScreen();
 
             Game_Data.Player[] players = new Game_Data.Player[2];
-            int boardSize = UI.Console.RecieveInputFromUser(ref players);
+            int boardSize = UI.Console.RecieveInputFromUser(players);
             UI.Console.ClearScreen();
             
             while (anotherGame == true)
@@ -29,7 +29,7 @@ namespace Othello
 
                 while (consecutiveNumberOfTurnsWithoutValidMoves != 2)
                 {
-                    TurnManager.OtheloTurnManager(ref board, players[turnIndicator % 2], ref consecutiveNumberOfTurnsWithoutValidMoves);
+                    TurnManager.OtheloTurnManager(board, players[turnIndicator % 2], ref consecutiveNumberOfTurnsWithoutValidMoves);
                     turnIndicator += 1;
                 }
 

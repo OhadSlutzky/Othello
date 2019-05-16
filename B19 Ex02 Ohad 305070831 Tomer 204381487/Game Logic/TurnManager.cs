@@ -17,14 +17,14 @@ namespace Game_Logic
             Up, UpRight, Right, DownRight, Down, DownLeft, Left, UpLeft
         }
 
-        public static void OtheloTurnManager(ref Game_Data.Board io_otheloBoard, Player i_player, ref int io_consecutiveNumberOfTurnsWithoutValidMoves)
+        public static void OtheloTurnManager(Game_Data.Board io_otheloBoard, Player i_player, ref int io_consecutiveNumberOfTurnsWithoutValidMoves)
         {
-            Board tempOtheloBoard = new Board(ref io_otheloBoard);
+            Board tempOtheloBoard = new Board(io_otheloBoard);
             Board.Point playersPointChoice;
             List<Board.Point> validPointsToChooseFrom = new List<Board.Point>();
             //io_otheloBoard.ResetPointsValidityToFalse();
 
-            if (UpdateValidCells(ref tempOtheloBoard, i_player.M_Color, ref validPointsToChooseFrom) > 0)
+            if (UpdateValidCells(tempOtheloBoard, i_player.M_Color, validPointsToChooseFrom) > 0)
             {
                 playersPointChoice = UI.Console.RecievePointFromPlayer(tempOtheloBoard, i_player, validPointsToChooseFrom);
                 playersPointChoice.M_CellValue = i_player.M_Color;
@@ -50,7 +50,7 @@ namespace Game_Logic
             }
         }
 
-        public static int UpdateValidCells(ref Board io_otheloBoard, char i_playerColor, ref List<Board.Point> io_validPointsToChooseFrom)
+        public static int UpdateValidCells(Board io_otheloBoard, char i_playerColor, List<Board.Point> io_validPointsToChooseFrom)
         {
             int noValueInt = 0;
             foreach (Board.Point currentPoint in io_otheloBoard.M_OtheloBoard )
@@ -59,7 +59,7 @@ namespace Game_Logic
                 {
                     for (eDirection direction = eDirection.Up; direction <= eDirection.UpLeft; direction++ )
                     {
-                        EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(ref io_otheloBoard, currentPoint, direction, k_UpdateValidity, ref io_validPointsToChooseFrom, ref noValueInt);
+                        EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(io_otheloBoard, currentPoint, direction, k_UpdateValidity, io_validPointsToChooseFrom, ref noValueInt);
                     }
                 }
             }
@@ -67,20 +67,20 @@ namespace Game_Logic
             return io_validPointsToChooseFrom.Count;
         }
 
-        public static void EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(ref Board io_otheloBoard, Board.Point i_currentPoint, eDirection i_direction, string UpdateValidityOrChangeColor, ref List<Board.Point> io_validPointsToChooseFrom, ref int io_NumberOfRivalDiscsToChangeIfNeeded)
+        public static void EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(Board io_otheloBoard, Board.Point i_currentPoint, eDirection i_direction, string UpdateValidityOrChangeColor, List<Board.Point> io_validPointsToChooseFrom, ref int io_NumberOfRivalDiscsToChangeIfNeeded)
         {
             switch(i_direction)
             {
                 case eDirection.Up:
                     if (UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                        UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, ref io_validPointsToChooseFrom);
+                        UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_Decrease, k_DontMove, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -89,13 +89,13 @@ namespace Game_Logic
                 case eDirection.UpRight:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_Decrease, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -104,13 +104,13 @@ namespace Game_Logic
                 case eDirection.Right:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_DontMove, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -119,13 +119,13 @@ namespace Game_Logic
                 case eDirection.DownRight:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                        UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Increase, k_Increase, ref io_validPointsToChooseFrom);
+                        UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Increase, k_Increase, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Increase, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Increase, k_Increase, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Increase, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_Increase, k_Increase, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -134,13 +134,13 @@ namespace Game_Logic
                 case eDirection.Down:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_Increase, k_DontMove, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -149,13 +149,13 @@ namespace Game_Logic
                 case eDirection.DownLeft:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Increase, k_Decrease, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Increase, k_Decrease, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Increase, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Increase, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint,  k_Increase, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint,  k_Increase, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -164,13 +164,13 @@ namespace Game_Logic
                 case eDirection.Left:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_DontMove, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -179,13 +179,13 @@ namespace Game_Logic
                 case eDirection.UpLeft:
                     if(UpdateValidityOrChangeColor == k_UpdateValidity)
                     {
-                    UpdateCellsValidity(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, ref io_validPointsToChooseFrom);
+                    UpdateCellsValidity(io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, io_validPointsToChooseFrom);
                     }
                     else
                     {
-                        if (IsRivalDiscChangeNeeded(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
+                        if (IsRivalDiscChangeNeeded(io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, ref io_NumberOfRivalDiscsToChangeIfNeeded))
                         {
-                            ChangeDiscsColor(ref io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
+                            ChangeDiscsColor(io_otheloBoard, i_currentPoint, k_Decrease, k_Decrease, io_NumberOfRivalDiscsToChangeIfNeeded);
                         }
                     }
 
@@ -193,7 +193,7 @@ namespace Game_Logic
             }
         }
 
-        public static void UpdateCellsValidity(ref Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeValue, int i_latitudeValue, ref List<Board.Point> io_validPointsToChooseFrom)
+        public static void UpdateCellsValidity(Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeValue, int i_latitudeValue, List<Board.Point> io_validPointsToChooseFrom)
         {
             int latitude = (i_currentPoint.M_Latitude - 'A') + i_latitudeValue;
             int longtitude = i_currentPoint.M_Longtitude - 1 + i_longtitudeValue;
@@ -221,7 +221,7 @@ namespace Game_Logic
             return i_latitude >= 0 && i_latitude < i_otheloBoard.M_BoardSize && i_longtitude >= 0 && i_longtitude < i_otheloBoard.M_BoardSize && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != i_playerColor && i_otheloBoard.M_OtheloBoard[i_longtitude, i_latitude].M_CellValue != Board.Point.k_Empty;
         }
 
-        public static bool IsRivalDiscChangeNeeded(ref Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeValue, int i_latitudeValue, ref int io_numberOfRivalDiscsToChange)
+        public static bool IsRivalDiscChangeNeeded(Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeValue, int i_latitudeValue, ref int io_numberOfRivalDiscsToChange)
         {
             int latitude = (i_currentPoint.M_Latitude - 'A') + i_latitudeValue;
             int longtitude = i_currentPoint.M_Longtitude - 1 + i_longtitudeValue;
@@ -244,7 +244,7 @@ namespace Game_Logic
             return isChangeOfDiscsNeeded;
         }
 
-        internal static void ChangeDiscsColor(ref Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeVal, int i_latitudeVal, int i_numberOfRivalDiscsToChange)
+        internal static void ChangeDiscsColor(Board io_otheloBoard, Board.Point i_currentPoint, int i_longtitudeVal, int i_latitudeVal, int i_numberOfRivalDiscsToChange)
         {
             int startLongtitude = i_currentPoint.M_Longtitude - 1;
             int startLatitude = i_currentPoint.M_Latitude - 'A';
@@ -262,7 +262,7 @@ namespace Game_Logic
             List<Board.Point> emptyList = new List<Board.Point>();
             for (eDirection direction = eDirection.Up; direction <= eDirection.UpLeft; direction++)
             {
-                EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(ref io_otheloBoard, i_userPointChosen, direction, k_ChangeRivalDiscsCellsColor, ref emptyList, ref numberOfDiscsToChange);
+                EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(io_otheloBoard, i_userPointChosen, direction, k_ChangeRivalDiscsCellsColor, emptyList, ref numberOfDiscsToChange);
                 numberOfDiscsToChange = 0; //might fix
             }
         }

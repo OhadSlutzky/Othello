@@ -56,7 +56,7 @@ namespace Game_Data
             return i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, i_Latitude - 'A'].M_IsAvailableCell == true; ///styleCop took down the (int) cast! !
         }
 
-        public Board(ref Board i_Board)
+        public Board(Board i_Board)
         {
             m_BoardSize = i_Board.M_BoardSize;
             m_OtheloBoard = new Point[m_BoardSize, m_BoardSize];
@@ -146,11 +146,11 @@ namespace Game_Data
         {
             foreach (Board.Point currentPoint in m_OtheloBoard)
             {
-                if (currentPoint.M_CellValue == Point.k_White)
+                if (currentPoint.M_CellValue == Point.k_Black)
                 {
                     player1NumberOfDiscs += 1;
                 }
-                else if(currentPoint.M_CellValue == Point.k_Black)
+                else if(currentPoint.M_CellValue == Point.k_White)
                 {
                     player2NumberOfDiscs += 1;
                 }
