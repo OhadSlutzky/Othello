@@ -27,7 +27,8 @@ namespace UI
             if (parseSucceed == false)
             {
                 ///means that the string was "Q"
-                System.Console.WriteLine("GOODBYE!!!");
+                System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
+                System.Threading.Thread.Sleep(2000);
                 System.Environment.Exit(0);
             }
             else
@@ -51,7 +52,8 @@ namespace UI
             if (parseSucceed == false)
             {
                 ///means that the string was "Q"
-                System.Console.WriteLine("GOODBYE!!!");
+                System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
+                System.Threading.Thread.Sleep(2000);
                 System.Environment.Exit(0);
             }
 
@@ -122,7 +124,8 @@ namespace UI
 
                 if (userInput == "Q")
                 {
-                    System.Console.WriteLine("\nGOODBYE!!");
+                    System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
+                    System.Threading.Thread.Sleep(2000);
                     System.Environment.Exit(0);
                 }
             }
@@ -176,6 +179,7 @@ namespace UI
 
         public static void PrintFinalScore(Game_Data.Player i_player1, Game_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
         {
+            string winnerMessage = null;
             string message = string.Format(
 @"  ______ _____ _   _          _             _____  _____ ____  _____  ______ 
  |  ____|_   _| \ | |   /\   | |           / ____|/ ____/ __ \|  __ \|  ____|
@@ -188,7 +192,7 @@ namespace UI
 
             
           {0}          {1}
-            {2}             {3}
+           {2}           {3}
 
 ",
 i_player1.M_PlayerName,
@@ -199,16 +203,18 @@ i_player2NumberOfDiscs);
 
             if (i_player1NumberOfDiscs > i_player2NumberOfDiscs)
             {
-                string winner = string.Format("{0} IS THE WINNER!!", i_player1.M_PlayerName);
+                winnerMessage = string.Format("{0} IS THE WINNER!!", i_player1.M_PlayerName);
             }
             else if (i_player1NumberOfDiscs < i_player2NumberOfDiscs)
             {
-                string winner = string.Format("{0} IS THE WINNER!!", i_player2.M_PlayerName);
+                winnerMessage = string.Format("{0} IS THE WINNER!!", i_player2.M_PlayerName);
             }
             else
             {
-                System.Console.WriteLine("IT IS A TIE!!\nUNBELIVABLE!!");
+                winnerMessage = "IT IS A TIE!!\nUNBELIVABLE!!";
             }
+
+            System.Console.WriteLine(winnerMessage);
         }
 
         public static void PrintValidPointsForPlayer(List<Game_Data.Board.Point> validPointsToChooseFrom)

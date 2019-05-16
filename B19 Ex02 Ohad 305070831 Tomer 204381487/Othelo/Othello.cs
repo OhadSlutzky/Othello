@@ -18,9 +18,9 @@ namespace Othello
             while (anotherGame == true)
             {
                 Board board = new Board(boardSize);
-
+                consecutiveNumberOfTurnsWithoutValidMoves = 0;
                 UI.Console.PrintBoard(board);
-                string message = string.Format("Please enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}.", board.M_BoardSize, (char)('A' + board.M_BoardSize - 1));
+                string message = string.Format("Please enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}", board.M_BoardSize, (char)('A' + board.M_BoardSize - 1));
                 System.Console.WriteLine(message);
 
                 while (consecutiveNumberOfTurnsWithoutValidMoves != 2)

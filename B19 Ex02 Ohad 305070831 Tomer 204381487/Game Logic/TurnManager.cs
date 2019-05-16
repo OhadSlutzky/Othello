@@ -235,7 +235,7 @@ namespace Game_Logic
                 isChangeOfDiscsNeeded = true;
             }
 
-            if (latitude < 0 || latitude > io_otheloBoard.M_BoardSize || longtitude < 0 || longtitude > io_otheloBoard.M_BoardSize || isChangeOfDiscsNeeded == false || io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue)
+            if (latitude < 0 || latitude >= io_otheloBoard.M_BoardSize || longtitude < 0 || longtitude >= io_otheloBoard.M_BoardSize || isChangeOfDiscsNeeded == false || io_otheloBoard.M_OtheloBoard[longtitude, latitude].M_CellValue != i_currentPoint.M_CellValue)
             {
                 isChangeOfDiscsNeeded = false;
                 io_numberOfRivalDiscsToChange = 0;
@@ -251,6 +251,7 @@ namespace Game_Logic
 
             for (int i = 1; i <= i_numberOfRivalDiscsToChange; i++)
             {
+                ///if ()
                 io_otheloBoard.M_OtheloBoard[startLongtitude + (i * i_longtitudeVal), startLatitude + (i * i_latitudeVal)].M_CellValue = i_currentPoint.M_CellValue;
             }
         }
@@ -262,6 +263,7 @@ namespace Game_Logic
             for (eDirection direction = eDirection.Up; direction <= eDirection.UpLeft; direction++)
             {
                 EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(ref io_otheloBoard, i_userPointChosen, direction, k_ChangeRivalDiscsCellsColor, ref emptyList, ref numberOfDiscsToChange);
+                numberOfDiscsToChange = 0; //might fix
             }
         }
     }
