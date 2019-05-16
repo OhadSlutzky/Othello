@@ -12,16 +12,20 @@ namespace Othello
             int player1NumberOfDiscs = 0;
             int player2NumberOfDiscs = 0;
             bool anotherGame = true;
+
+            UI.Console.PrintIntro();
+            UI.Console.ClearScreen();
+
             Game_Data.Player[] players = new Game_Data.Player[2];
             int boardSize = UI.Console.RecieveInputFromUser(ref players);
-
+            UI.Console.ClearScreen();
+            
             while (anotherGame == true)
             {
                 Board board = new Board(boardSize);
                 consecutiveNumberOfTurnsWithoutValidMoves = 0;
+                UI.Console.PrintInputPointFormat(board);
                 UI.Console.PrintBoard(board);
-                string message = string.Format("Please enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}", board.M_BoardSize, (char)('A' + board.M_BoardSize - 1));
-                System.Console.WriteLine(message);
 
                 while (consecutiveNumberOfTurnsWithoutValidMoves != 2)
                 {
@@ -32,8 +36,11 @@ namespace Othello
                 board.CountNumberOfDiscsForBothPlayers(ref player1NumberOfDiscs, ref player2NumberOfDiscs);
                 UI.Console.PrintFinalScore(players[0], players[1], player1NumberOfDiscs, player2NumberOfDiscs);
                 anotherGame = UI.Console.AskIfPlayAgain();
+                System.Threading.Thread.Sleep(2000);
                 UI.Console.ClearScreen();
             }
+
+            UI.Console.ExitSequence();
         }
     }
 }

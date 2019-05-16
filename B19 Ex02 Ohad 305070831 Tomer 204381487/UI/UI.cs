@@ -10,14 +10,21 @@ namespace UI
             int numOfPlayers = 0;
             string strNumOfPlayers = null;
             string strBoardSize = null;
+            string userInput = null;
 
             io_players[0] = new Game_Data.Player();
             io_players[1] = new Game_Data.Player();
 
             System.Console.WriteLine("AT ANY POINT IN THE GAME, ENTER 'Q' TO EXIT\n");
             System.Console.WriteLine("Please enter your name: ");
+            userInput = System.Console.ReadLine();
 
-            io_players[0].M_PlayerName = System.Console.ReadLine();
+            if (userInput == "Q")
+            {
+                ExitSequence();
+            }
+
+            io_players[0].M_PlayerName = userInput;
             io_players[0].M_Color = Game_Data.Player.k_White;
 
             strNumOfPlayers = RecieveNumOfPlayers();
@@ -27,16 +34,21 @@ namespace UI
             if (parseSucceed == false)
             {
                 ///means that the string was "Q"
-                System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
-                System.Threading.Thread.Sleep(2000);
-                System.Environment.Exit(0);
+                ExitSequence();
             }
             else
             {
                 if (numOfPlayers == 2)
                 {
                     System.Console.WriteLine("Please enter the second player's name: ");
-                    io_players[1].M_PlayerName = System.Console.ReadLine();
+                    userInput = System.Console.ReadLine();
+
+                    if (userInput == "Q")
+                    {
+                        ExitSequence();
+                    }
+
+                    io_players[1].M_PlayerName = userInput;
                 }
                 else
                 {
@@ -52,9 +64,7 @@ namespace UI
             if (parseSucceed == false)
             {
                 ///means that the string was "Q"
-                System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
-                System.Threading.Thread.Sleep(2000);
-                System.Environment.Exit(0);
+                ExitSequence();
             }
 
             return boardSize;
@@ -120,13 +130,15 @@ namespace UI
                             System.Console.WriteLine("Please place your disc by choosing a cell in such a way that there is at least one straight\n(horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs.");
                         }
                     }
+                    else
+                    {
+                        System.Console.WriteLine("Invalid Input!");
+                    }
                 }
 
                 if (userInput == "Q")
                 {
-                    System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
-                    System.Threading.Thread.Sleep(2000);
-                    System.Environment.Exit(0);
+                    ExitSequence();
                 }
             }
             else   ///It's PC's turn
@@ -229,6 +241,36 @@ i_player2NumberOfDiscs);
             }
 
             System.Console.WriteLine(o_stringValidPoints);
+        }
+
+        public static void ExitSequence()
+        {
+            System.Console.WriteLine("Thank you for playing our game!!! Goodbye!");
+            System.Threading.Thread.Sleep(2000);
+            System.Environment.Exit(0);
+        }
+
+        public static void PrintIntro()
+        {
+            string intro = string.Format(
+@"
+
+
+██████╗ ████████╗██╗  ██╗███████╗██╗     ██╗      ██████╗ 
+██╔═══██╗╚══██╔══╝██║  ██║██╔════╝██║     ██║     ██╔═══██╗
+██║   ██║   ██║   ███████║█████╗  ██║     ██║     ██║   ██║
+██║   ██║   ██║   ██╔══██║██╔══╝  ██║     ██║     ██║   ██║
+╚██████╔╝   ██║   ██║  ██║███████╗███████╗███████╗╚██████╔╝
+ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝ ");
+
+            System.Console.WriteLine(intro);
+            System.Threading.Thread.Sleep(2000);
+        }
+
+        public static void PrintInputPointFormat(Game_Data.Board i_othelloBoard)
+        {
+            string inputPointFormat = string.Format("\nPlease enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}\n", i_othelloBoard.M_BoardSize, (char)('A' + i_othelloBoard.M_BoardSize - 1));
+            System.Console.WriteLine(inputPointFormat);
         }
     }
 }
