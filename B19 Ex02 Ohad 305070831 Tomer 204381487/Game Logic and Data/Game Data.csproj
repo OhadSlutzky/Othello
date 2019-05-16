@@ -7,8 +7,8 @@
     <ProjectGuid>{729A2641-3770-4CF7-BE3E-C82D799E2EA1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game_Logic_and_Data</RootNamespace>
-    <AssemblyName>Game Logic and Data</AssemblyName>
+    <RootNamespace>Game_Data</RootNamespace>
+    <AssemblyName>Game Data</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

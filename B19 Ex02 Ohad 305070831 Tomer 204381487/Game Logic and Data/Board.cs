@@ -48,6 +48,7 @@ namespace Game_Data
                     Console.WriteLine("\n  =========================");
                 }
             }
+
             Console.WriteLine();
         }
 
@@ -150,7 +151,7 @@ namespace Game_Data
                 {
                     player1NumberOfDiscs += 1;
                 }
-                else if(currentPoint.M_CellValue == Point.k_White)
+                else if (currentPoint.M_CellValue == Point.k_White)
                 {
                     player2NumberOfDiscs += 1;
                 }
@@ -159,7 +160,7 @@ namespace Game_Data
 
         public void ResetPointsValidityToFalse()
         {
-            foreach(Point currentPoint in m_OtheloBoard)
+            foreach (Point currentPoint in m_OtheloBoard)
             {
                 currentPoint.M_IsAvailableCell = false;
             }
@@ -233,51 +234,6 @@ namespace Game_Data
                     m_IsAvailableCell = value;
                 }
             }
-        }
-    }
-
-    public class Player
-    {
-        private string m_PlayerName;
-        private char m_Color;
-        public const char k_Black = 'X';
-        public const char k_White = 'O';
-
-        public Player()
-        {
-            m_PlayerName = null;
-        }
-
-        public string M_PlayerName
-        {
-            get
-            {
-                return m_PlayerName;
-            }
-
-            set
-            {
-                m_PlayerName = value;
-            }
-        }
-
-        public char M_Color
-        {
-            get
-            {
-                return m_Color;
-            }
-
-            set
-            {
-                m_Color = value;
-            }
-        }
-
-        public void PrintPlayerInfo()
-        {
-            string playerInfo = string.Format("{0} {1}", m_PlayerName, m_Color);
-            System.Console.WriteLine(playerInfo);
         }
     }
 }

@@ -130,7 +130,7 @@ namespace UI
                             System.Console.WriteLine("Please place your disc by choosing a cell in such a way that there is at least one straight\n(horizontal, vertical, or diagonal) occupied line between the new disc and another one of your discs.");
                         }
                     }
-                    else
+                    else if(userInput != "Q")
                     {
                         System.Console.WriteLine("Invalid Input!");
                     }
@@ -141,8 +141,9 @@ namespace UI
                     ExitSequence();
                 }
             }
-            else   ///It's PC's turn
+            else 
             {
+            // It's PC's turn
                 System.Random rand = new System.Random();
                 o_PlayerChosenPoint = i_validPointsToChooseFrom[rand.Next(i_validPointsToChooseFrom.Count)];
             }

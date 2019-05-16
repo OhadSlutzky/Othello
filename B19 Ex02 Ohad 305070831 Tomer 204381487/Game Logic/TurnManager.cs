@@ -1,6 +1,6 @@
 ﻿using System;
-using Game_Data;
 using System.Collections.Generic;
+using Game_Data;
 
 namespace Game_Logic
 {
@@ -22,7 +22,6 @@ namespace Game_Logic
             Board tempOtheloBoard = new Board(io_otheloBoard);
             Board.Point playersPointChoice;
             List<Board.Point> validPointsToChooseFrom = new List<Board.Point>();
-            //io_otheloBoard.ResetPointsValidityToFalse();
 
             if (UpdateValidCells(tempOtheloBoard, i_player.M_Color, validPointsToChooseFrom) > 0)
             {
@@ -260,10 +259,11 @@ namespace Game_Logic
         {
             int numberOfDiscsToChange = 0;
             List<Board.Point> emptyList = new List<Board.Point>();
+
             for (eDirection direction = eDirection.Up; direction <= eDirection.UpLeft; direction++)
             {
                 EightWayCellsCheckAndUpdateValidityOrChangeCellsColor(io_otheloBoard, i_userPointChosen, direction, k_ChangeRivalDiscsCellsColor, emptyList, ref numberOfDiscsToChange);
-                numberOfDiscsToChange = 0; //might fix
+                numberOfDiscsToChange = 0;
             }
         }
     }
