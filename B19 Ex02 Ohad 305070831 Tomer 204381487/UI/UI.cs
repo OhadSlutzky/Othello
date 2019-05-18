@@ -4,7 +4,7 @@ namespace UI
 {
     public class Console
     {
-        public static int RecieveInputFromUser(Game_Data.Player[] io_players)
+        public static int RecieveInputFromUser(Game_Data.Player[] io_Players)
         {
             int boardSize = 0;
             int numOfPlayers = 0;
@@ -12,10 +12,10 @@ namespace UI
             string strBoardSize = null;
             string userInput = null;
 
-            io_players[0] = new Game_Data.Player();
-            io_players[1] = new Game_Data.Player();
+            io_Players[0] = new Game_Data.Player();
+            io_Players[1] = new Game_Data.Player();
 
-            System.Console.WriteLine("AT ANY POINT IN THE GAME, ENTER 'Q' TO EXIT\n");
+            System.Console.WriteLine("Welcome to Othello!\nAT ANY POINT IN THE GAME, ENTER 'Q' TO EXIT\n");
             System.Console.WriteLine("Please enter your name: ");
             userInput = System.Console.ReadLine();
 
@@ -24,8 +24,8 @@ namespace UI
                 ExitSequence();
             }
 
-            io_players[0].M_PlayerName = userInput;
-            io_players[0].M_Color = Game_Data.Player.k_Black;
+            io_Players[0].M_PlayerName = userInput;
+            io_Players[0].M_Color = Game_Data.Player.k_Black;
 
             strNumOfPlayers = RecieveNumOfPlayers();
 
@@ -48,14 +48,14 @@ namespace UI
                         ExitSequence();
                     }
 
-                    io_players[1].M_PlayerName = userInput;
+                    io_Players[1].M_PlayerName = userInput;
                 }
                 else
                 {
-                    io_players[1].M_PlayerName = "PC";
+                    io_Players[1].M_PlayerName = "PC";
                 }
 
-                io_players[1].M_Color = Game_Data.Player.k_White;
+                io_Players[1].M_Color = Game_Data.Player.k_White;
             }
 
             strBoardSize = RecieveBoardSize();
@@ -100,7 +100,7 @@ namespace UI
             return userInput;
         }
 
-        public static Game_Data.Board.Point RecievePointFromPlayer(Game_Data.Board i_otheloBoard, Game_Data.Player i_Player, List<Game_Data.Board.Point> i_validPointsToChooseFrom)
+        public static Game_Data.Board.Point RecievePointFromPlayer(Game_Data.Board i_OthelloBoard, Game_Data.Player i_Player, List<Game_Data.Board.Point> i_ValidPointsToChooseFrom)
         {
             Game_Data.Board.Point o_PlayerChosenPoint = null;
             string userInput = null;
@@ -114,12 +114,12 @@ namespace UI
                 while (availablePoint == false && userInput != "Q")
                 {
                     System.Console.WriteLine("Please choose a point to place your disc in from the following options: ");
-                    UI.Console.PrintValidPointsForPlayer(i_validPointsToChooseFrom);
+                    UI.Console.PrintValidPointsForPlayer(i_ValidPointsToChooseFrom);
                     userInput = System.Console.ReadLine();
 
-                    if (IsValidInput(userInput, i_otheloBoard.M_BoardSize))
+                    if (IsValidInput(userInput, i_OthelloBoard.M_BoardSize))
                     {
-                        if (Game_Data.Board.IsValidDiscPlacement(i_otheloBoard, int.Parse(userInput[0].ToString()), userInput[2], i_Player))
+                        if (Game_Data.Board.IsValidDiscPlacement(i_OthelloBoard, int.Parse(userInput[0].ToString()), userInput[2], i_Player))
                         {
                             o_PlayerChosenPoint = new Game_Data.Board.Point(int.Parse(userInput[0].ToString()), userInput[2], i_Player.M_Color);
                             availablePoint = true;
@@ -145,15 +145,15 @@ namespace UI
             {
                 /// It's PC's turn
                 System.Random rand = new System.Random();
-                o_PlayerChosenPoint = i_validPointsToChooseFrom[rand.Next(i_validPointsToChooseFrom.Count)];
+                o_PlayerChosenPoint = i_ValidPointsToChooseFrom[rand.Next(i_ValidPointsToChooseFrom.Count)];
             }
 
             return o_PlayerChosenPoint;
         }
         
-        internal static bool IsValidInput(string i_userInput, int i_boardSize)
+        internal static bool IsValidInput(string i_UserInput, int i_BoardSize)
         {
-            return i_userInput.Length == 3 && i_userInput[1] == ',' && i_userInput[0] >= '0' && i_userInput[0] <= (char)(i_boardSize + '0') && i_userInput[2] >= 'A' && i_userInput[2] <= (char)(i_boardSize + 'A');
+            return i_UserInput.Length == 3 && i_UserInput[1] == ',' && i_UserInput[0] >= '0' && i_UserInput[0] <= (char)(i_BoardSize + '0') && i_UserInput[2] >= 'A' && i_UserInput[2] <= (char)(i_BoardSize + 'A');
         }
 
         public static void ClearScreen()
@@ -161,15 +161,16 @@ namespace UI
             Ex02.ConsoleUtils.Screen.Clear();
         }
 
-        public static void PrintBoard(Game_Data.Board i_otheloBoard)
+        public static void PrintBoard(Game_Data.Board i_OthelloBoard)
         {
-            Game_Data.Board.PrintBoard(i_otheloBoard);
+            Game_Data.Board.PrintBoard(i_OthelloBoard);
         }
 
         public static bool AskIfPlayAgain()
         {
             string userInput = null;
-            bool anotherGame = false;   
+            bool anotherGame = false;  
+             
             System.Console.WriteLine("Would you like to have another game?");
 
             while (userInput != "yes" && userInput != "no" && userInput != "Q")
@@ -190,7 +191,7 @@ namespace UI
             return anotherGame;
         }
 
-        public static void PrintFinalScore(Game_Data.Player i_player1, Game_Data.Player i_player2, int i_player1NumberOfDiscs, int i_player2NumberOfDiscs)
+        public static void PrintFinalScore(Game_Data.Player i_Player1, Game_Data.Player i_Player2, int i_Player1NumberOfDiscs, int i_Player2NumberOfDiscs)
         {
             string winnerMessage = null;
             string finalScoreMessage = string.Format(
@@ -206,22 +207,22 @@ namespace UI
 {0} ('{1}') : {2}  Vs  {3} ('{4}') : {5}
 
 ",
-i_player1.M_PlayerName,
-i_player1.M_Color,
-i_player1NumberOfDiscs,
-i_player2.M_PlayerName,
-i_player2.M_Color,
-i_player2NumberOfDiscs);
+i_Player1.M_PlayerName,
+i_Player1.M_Color,
+i_Player1NumberOfDiscs,
+i_Player2.M_PlayerName,
+i_Player2.M_Color,
+i_Player2NumberOfDiscs);
 
             System.Console.WriteLine(finalScoreMessage);
 
-            if (i_player1NumberOfDiscs > i_player2NumberOfDiscs)
+            if (i_Player1NumberOfDiscs > i_Player2NumberOfDiscs)
             {
-                winnerMessage = string.Format("{0} IS THE WINNER!!", i_player1.M_PlayerName);
+                winnerMessage = string.Format("{0} IS THE WINNER!!", i_Player1.M_PlayerName);
             }
-            else if (i_player1NumberOfDiscs < i_player2NumberOfDiscs)
+            else if (i_Player1NumberOfDiscs < i_Player2NumberOfDiscs)
             {
-                winnerMessage = string.Format("{0} IS THE WINNER!!", i_player2.M_PlayerName);
+                winnerMessage = string.Format("{0} IS THE WINNER!!", i_Player2.M_PlayerName);
             }
             else
             {
@@ -231,12 +232,12 @@ i_player2NumberOfDiscs);
             System.Console.WriteLine(winnerMessage);
         }
 
-        public static void PrintValidPointsForPlayer(List<Game_Data.Board.Point> validPointsToChooseFrom)
+        public static void PrintValidPointsForPlayer(List<Game_Data.Board.Point> i_ValidPointsToChooseFrom)
         {
             System.Text.StringBuilder o_stringValidPoints = new System.Text.StringBuilder(7);
             string message = null;
 
-            foreach(Game_Data.Board.Point currentPoint in validPointsToChooseFrom)
+            foreach(Game_Data.Board.Point currentPoint in i_ValidPointsToChooseFrom)
             {
                 message = string.Format("{0},{1}   ", currentPoint.M_Longtitude, currentPoint.M_Latitude);
                 o_stringValidPoints.Append(message);
@@ -269,10 +270,11 @@ i_player2NumberOfDiscs);
             System.Threading.Thread.Sleep(2000);
         }
 
-        public static void PrintInputPointFormat(Game_Data.Board i_othelloBoard)
+        public static void PrintInputPointFormat(Game_Data.Board i_OthelloBoard)
         {
-            string inputPointFormat = string.Format("\nPlease enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}\n", i_othelloBoard.M_BoardSize, (char)('A' + i_othelloBoard.M_BoardSize - 1));
+            string inputPointFormat = string.Format("\nPlease enter the point in the following form - n,c where n is an iteger between 1 - {0} and c is a character between A - {1}\n", i_OthelloBoard.M_BoardSize, (char)('A' + i_OthelloBoard.M_BoardSize - 1));
             System.Console.WriteLine(inputPointFormat);
+            System.Console.WriteLine("For your knowledge:\nplace your disc on the board by choosing a cell, in such a way that there is at least one straight (horizontal, vertical, or diagonal)\noccupied line between the new disc and another one of your discs, with one or more contiguous rival pieces between them.\n");
         }
     }
 }

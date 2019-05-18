@@ -5,15 +5,15 @@ namespace Game_Data
     public class Board
     {
         private int m_BoardSize;
-        private Point[,] m_OtheloBoard;
+        private Point[,] m_OthelloBoard;
 
-        public static void PrintBoard(Board i_otheloBoard)
+        public static void PrintBoard(Board i_OthelloBoard)
         {
-            for (int i = 0; i < i_otheloBoard.m_BoardSize; i++)
+            for (int i = 0; i < i_OthelloBoard.m_BoardSize; i++)
             {
                 if (i == 0)
                 {
-                    if (i_otheloBoard.m_BoardSize == 8)
+                    if (i_OthelloBoard.m_BoardSize == 8)
                     {
                         Console.WriteLine("    A   B   C   D   E   F   G   H");
                         Console.WriteLine("  =================================");
@@ -25,21 +25,21 @@ namespace Game_Data
                     }
                 }
 
-                for (char c = 'A'; c < (char)('A' + i_otheloBoard.m_BoardSize); c++)
+                for (char c = 'A'; c < (char)('A' + i_OthelloBoard.m_BoardSize); c++)
                 {
                     if (c == 'A')
                     {
-                        string outputMessage = string.Format("{0} | {1} |", i + 1, i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        string outputMessage = string.Format("{0} | {1} |", i + 1, i_OthelloBoard.m_OthelloBoard[i, c - 'A'].M_CellValue);
                         Console.Write(outputMessage);
                     }
                     else
                     {
-                        string outputMessage = string.Format(" {0} |", i_otheloBoard.m_OtheloBoard[i, c - 'A'].M_CellValue);
+                        string outputMessage = string.Format(" {0} |", i_OthelloBoard.m_OthelloBoard[i, c - 'A'].M_CellValue);
                         Console.Write(outputMessage);
                     }
                 }
 
-                if (i_otheloBoard.m_BoardSize == 8)
+                if (i_OthelloBoard.m_BoardSize == 8)
                 {
                     Console.WriteLine("\n  =================================");
                 }
@@ -52,21 +52,23 @@ namespace Game_Data
             Console.WriteLine();
         }
 
-        public static bool IsValidDiscPlacement(Board i_otheloBoard, int i_Longtitude, char i_Latitude, Game_Data.Player i_Player)
+        public static bool IsValidDiscPlacement(Board i_OthelloBoard, int i_Longtitude, char i_Latitude, Game_Data.Player i_Player)
         {
-            return i_otheloBoard.M_OtheloBoard[i_Longtitude - 1, i_Latitude - 'A'].M_IsAvailableCell == true; ///styleCop took down the (int) cast! !
+            return i_OthelloBoard.M_OthelloBoard[i_Longtitude - 1, i_Latitude - 'A'].M_IsAvailableCell == true;
         }
 
         public Board(Board i_Board)
         {
             m_BoardSize = i_Board.M_BoardSize;
-            m_OtheloBoard = new Point[m_BoardSize, m_BoardSize];
+            m_OthelloBoard = new Point[m_BoardSize, m_BoardSize];
+
             char maxBoardLatitude = (char)('A' + m_BoardSize);
+
             for (int i = 0; i < m_BoardSize; i++)
             {
                 for (char c = 'A'; c < maxBoardLatitude; c++)
                 {
-                    m_OtheloBoard[i, (int)(c - 'A')] = new Point(i + 1, c, i_Board.m_OtheloBoard[i, (int)(c - 'A')].M_CellValue);
+                    m_OthelloBoard[i, (int)(c - 'A')] = new Point(i + 1, c, i_Board.m_OthelloBoard[i, (int)(c - 'A')].M_CellValue);
                 }
             }
         }
@@ -84,23 +86,23 @@ namespace Game_Data
             }
         }
 
-        public Point[,] M_OtheloBoard
+        public Point[,] M_OthelloBoard
         {
             get
             {
-                return m_OtheloBoard;
+                return m_OthelloBoard;
             }
 
             set
             {
-                m_OtheloBoard = value;
+                m_OthelloBoard = value;
             }
         }
 
-        public Board(int i_boardSize)
+        public Board(int i_BoardSize)
         {
-            m_BoardSize = i_boardSize;
-            m_OtheloBoard = new Point[m_BoardSize, m_BoardSize];
+            m_BoardSize = i_BoardSize;
+            m_OthelloBoard = new Point[m_BoardSize, m_BoardSize];
 
             char maxBoardLatitude = (char)('A' + m_BoardSize);
 
@@ -108,7 +110,7 @@ namespace Game_Data
             {
                 for (char c = 'A'; c < maxBoardLatitude; c++)
                 {
-                    m_OtheloBoard[i, (c - 'A')] = new Point(i + 1, c, Point.k_Empty);
+                    m_OthelloBoard[i, (c - 'A')] = new Point(i + 1, c, Point.k_Empty);
                 }
             }
 
@@ -119,50 +121,42 @@ namespace Game_Data
         {
             if (m_BoardSize == 8)
             {
-                m_OtheloBoard[3, 3].M_CellValue = Point.k_White;
-                m_OtheloBoard[3, 4].M_CellValue = Point.k_Black;
-                m_OtheloBoard[4, 3].M_CellValue = Point.k_Black;
-                m_OtheloBoard[4, 4].M_CellValue = Point.k_White;
+                m_OthelloBoard[3, 3].M_CellValue = Point.k_White;
+                m_OthelloBoard[3, 4].M_CellValue = Point.k_Black;
+                m_OthelloBoard[4, 3].M_CellValue = Point.k_Black;
+                m_OthelloBoard[4, 4].M_CellValue = Point.k_White;
 
-                m_OtheloBoard[3, 3].M_IsAvailableCell = false;
-                m_OtheloBoard[3, 4].M_IsAvailableCell = false;
-                m_OtheloBoard[4, 3].M_IsAvailableCell = false;
-                m_OtheloBoard[4, 4].M_IsAvailableCell = false;
+                m_OthelloBoard[3, 3].M_IsAvailableCell = false;
+                m_OthelloBoard[3, 4].M_IsAvailableCell = false;
+                m_OthelloBoard[4, 3].M_IsAvailableCell = false;
+                m_OthelloBoard[4, 4].M_IsAvailableCell = false;
             }
             else if (m_BoardSize == 6)
             {
-                m_OtheloBoard[2, 2].M_CellValue = Point.k_White;
-                m_OtheloBoard[2, 3].M_CellValue = Point.k_Black;
-                m_OtheloBoard[3, 2].M_CellValue = Point.k_Black;
-                m_OtheloBoard[3, 3].M_CellValue = Point.k_White;
+                m_OthelloBoard[2, 2].M_CellValue = Point.k_White;
+                m_OthelloBoard[2, 3].M_CellValue = Point.k_Black;
+                m_OthelloBoard[3, 2].M_CellValue = Point.k_Black;
+                m_OthelloBoard[3, 3].M_CellValue = Point.k_White;
 
-                m_OtheloBoard[2, 2].M_IsAvailableCell = false;
-                m_OtheloBoard[2, 3].M_IsAvailableCell = false;
-                m_OtheloBoard[3, 2].M_IsAvailableCell = false;
-                m_OtheloBoard[3, 3].M_IsAvailableCell = false;
+                m_OthelloBoard[2, 2].M_IsAvailableCell = false;
+                m_OthelloBoard[2, 3].M_IsAvailableCell = false;
+                m_OthelloBoard[3, 2].M_IsAvailableCell = false;
+                m_OthelloBoard[3, 3].M_IsAvailableCell = false;
             }
         }
 
-        public void CountNumberOfDiscsForBothPlayers(ref int player1NumberOfDiscs, ref int player2NumberOfDiscs)
+        public void CountNumberOfDiscsForBothPlayers(ref int io_Player1NumberOfDiscs, ref int io_Player2NumberOfDiscs)
         {
-            foreach (Board.Point currentPoint in m_OtheloBoard)
+            foreach (Board.Point currentPoint in m_OthelloBoard)
             {
                 if (currentPoint.M_CellValue == Point.k_Black)
                 {
-                    player1NumberOfDiscs += 1;
+                    io_Player1NumberOfDiscs += 1;
                 }
                 else if (currentPoint.M_CellValue == Point.k_White)
                 {
-                    player2NumberOfDiscs += 1;
+                    io_Player2NumberOfDiscs += 1;
                 }
-            }
-        }
-
-        public void ResetPointsValidityToFalse()
-        {
-            foreach (Point currentPoint in m_OtheloBoard)
-            {
-                currentPoint.M_IsAvailableCell = false;
             }
         }
 
@@ -176,11 +170,11 @@ namespace Game_Data
             public const char k_White = 'O';
             public const char k_Empty = ' ';
 
-            public Point(int i_longtitude, char i_latitude, char i_cellValue)
+            public Point(int i_Longtitude, char i_Latitude, char i_CellValue)
             {
-                m_Longtitude = i_longtitude;
-                m_Latitude = i_latitude;
-                m_CellValue = i_cellValue;
+                m_Longtitude = i_Longtitude;
+                m_Latitude = i_Latitude;
+                m_CellValue = i_CellValue;
             }
 
             public int M_Longtitude

@@ -38,7 +38,7 @@
     <Compile Include="TurnManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game Logic and Data\Game Data.csproj">
+    <ProjectReference Include="..\Game Data\Game Data.csproj">
       <Project>{729a2641-3770-4cf7-be3e-c82d799e2ea1}</Project>
       <Name>Game Data</Name>
     </ProjectReference>

@@ -29,7 +29,7 @@ namespace Othello
 
                 while (consecutiveNumberOfTurnsWithoutValidMoves != 2)
                 {
-                    TurnManager.OtheloTurnManager(board, players[turnIndicator % 2], ref consecutiveNumberOfTurnsWithoutValidMoves);
+                    TurnManager.OthelloTurnManager(board, players[turnIndicator % 2], ref consecutiveNumberOfTurnsWithoutValidMoves);
                     turnIndicator += 1;
                 }
 
