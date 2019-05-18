@@ -7,8 +7,8 @@
     <ProjectGuid>{386730A1-9901-46E0-84CE-A91952D5E3EE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>B19_Ex02_Ohad_305070831_Tomer_204381487</RootNamespace>
-    <AssemblyName>B19 Ex02 Ohad 305070831 Tomer 204381487</AssemblyName>
+    <RootNamespace>Ex02_Othello</RootNamespace>
+    <AssemblyName>Ex02 Othello</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

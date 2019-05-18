@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex02 Othello", "B19 Ex02 Ohad 305070831 Tomer 204381487\Ex02 Othello.csproj", "{386730A1-9901-46E0-84CE-A91952D5E3EE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Othello", "Othelo\Othello.csproj", "{4479911B-5D6A-44E4-AA92-389FD93D7DAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{D92E9DB1-3FAC-49AE-8749-8BBC7ED7F672}"
@@ -13,16 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game Logic", "Game Logic\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game Data", "Game Data\Game Data.csproj", "{729A2641-3770-4CF7-BE3E-C82D799E2EA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D39AD821-8AB9-4766-8BA3-9EB9386317A1}"
+	ProjectSection(SolutionItems) = preProject
+		README.txt = README.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex02 Othello", "Ex02 Othello\Ex02 Othello.csproj", "{386730A1-9901-46E0-84CE-A91952D5E3EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4479911B-5D6A-44E4-AA92-389FD93D7DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4479911B-5D6A-44E4-AA92-389FD93D7DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4479911B-5D6A-44E4-AA92-389FD93D7DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +40,10 @@ Global
 		{729A2641-3770-4CF7-BE3E-C82D799E2EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729A2641-3770-4CF7-BE3E-C82D799E2EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729A2641-3770-4CF7-BE3E-C82D799E2EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386730A1-9901-46E0-84CE-A91952D5E3EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
