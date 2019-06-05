@@ -158,7 +158,7 @@ namespace UI
 
         public static void ClearScreen()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            System.Console.Clear();
         }
 
         public static void PrintBoard(Game_Data.Board i_OthelloBoard)
